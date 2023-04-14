@@ -7,21 +7,15 @@ const columns = ["Title", "Year", "Category", "Grade"];
 
 const MovieList = ({ searchResults }) => {
 	const [movies, setMovies] = useState([]);
-	const [showAlert, setShowAlert] = useState(false);
-
 
 	useEffect(() => {
-		if (Array.isArray(searchResults) && searchResults.length) {
+		if (searchResults.length) {
 			setMovies(searchResults);
 		} else {
 			const fetchData = async () => {
 				try {
 					const movies = await getMovies();
-					if (movies.length === 0) {
-						setShowAlert(true);
-					} else {
-						setMovies(movies);
-					}
+					setMovies(movies);
 				} catch (error) {
 					console.error(error);
 				}
@@ -30,19 +24,9 @@ const MovieList = ({ searchResults }) => {
 		}
 	}, [searchResults]);
 
-	const handleAlertClose = () => {
-		setShowAlert(false);
-	};
-
 	return (
 		<div>
 			<h2>List of movies</h2>
-			{showAlert && (
-				<div className='search-bar__alert'>
-					<p>No movies found</p>
-					<button onClick={handleAlertClose}>Close</button>
-				</div>
-			)}
 			{movies.length > 0 ? (
 				<ListTable columns={columns} data={movies} />
 			) : (
@@ -51,5 +35,4 @@ const MovieList = ({ searchResults }) => {
 		</div>
 	);
 };
-
 export default MovieList;
