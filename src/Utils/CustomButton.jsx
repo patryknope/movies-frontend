@@ -1,9 +1,10 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import '../Styles/CustomButton.css';
+import React from "react";
+import "../Styles/CustomButton.css";
 
-export const CustomButton = ({ text }) => {
-    return (
-        <Button className="custom-btn">{text}</Button>
-    );
+export const CustomButton = ({ text, onClick }) => {
+	return (
+		<button className='custom-btn' onClick={onClick}>
+			{text}
+		</button>
+	);
 };

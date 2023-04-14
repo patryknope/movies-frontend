@@ -1,29 +1,28 @@
-.Navbar {
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.header {
+	background: linear-gradient(to right, #16222a, #3a6073);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem;
+	color: #fff;
 }
 
-.Navbar.Brand {
-    font-size: 1.5rem;
-    font-weight: bold;
+.header h1 {
+	font-family: Arial, sans-serif;
+	font-size: 2rem;
+	margin: 0;
 }
 
-.Navbar.Collapse {
-    justify-content: flex-end;
+.header-buttons {
+	display: flex;
+	align-items: center;
 }
 
-.Navbar .Nav.Link {
-    color: #555;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-left: 1rem;
+.header-searchbar {
+	margin-left: auto;
 }
-
-.Navbar .Nav.Link:hover {
-    color: #222;
-}
-.header-buttons-container {
-    display: flex;
-    justify-content: space-between;
+.modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

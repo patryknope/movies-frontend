@@ -1,25 +1,55 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { getMovies } from "../service/Api.js";
+import "../Styles/Movies.css";
+import ListTable from "../Utils/ListTable";
 
-function MovieList() {
-    const [movies, setMovies] = useState([]);
+const columns = ["Title", "Year", "Category", "Grade"];
 
-    useEffect(() => {
-        axios.get("/movies").then((response) => {
-            setMovies(response.data);
-        });
-    }, []);
+const MovieList = ({ searchResults }) => {
+	const [movies, setMovies] = useState([]);
+	const [showAlert, setShowAlert] = useState(false);
 
-    return (
-        <div>
-            <h1>Movie List</h1>
-            <ul>
-                {movies.map((movie) => (
-                    <li key={movie.id}>{movie.title}</li>
-                ))}
-            </ul>
-        </div>
-    );
-}
+
+	useEffect(() => {
+		if (Array.isArray(searchResults) && searchResults.length) {
+			setMovies(searchResults);
+		} else {
+			const fetchData = async () => {
+				try {
+					const movies = await getMovies();
+					if (movies.length === 0) {
+						setShowAlert(true);
+					} else {
+						setMovies(movies);
+					}
+				} catch (error) {
+					console.error(error);
+				}
+			};
+			fetchData();
+		}
+	}, [searchResults]);
+
+	const handleAlertClose = () => {
+		setShowAlert(false);
+	};
+
+	return (
+		<div>
+			<h2>List of movies</h2>
+			{showAlert && (
+				<div className='search-bar__alert'>
+					<p>No movies found</p>
+					<button onClick={handleAlertClose}>Close</button>
+				</div>
+			)}
+			{movies.length > 0 ? (
+				<ListTable columns={columns} data={movies} />
+			) : (
+				<p>Loading...</p>
+			)}
+		</div>
+	);
+};
 
 export default MovieList;

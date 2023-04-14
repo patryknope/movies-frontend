@@ -1,0 +1,16 @@
+.star-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.star {
+	margin: 0 2px;
+	width: 1.5em;
+	height: 1.5em;
+	fill: #ffc107;
+}
+
+.star-empty {
+	fill: #e4e5e9;
+}

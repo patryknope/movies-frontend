@@ -1,0 +1,42 @@
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 8px;
+}
+
+th {
+	background-color: #333;
+	color: white;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #ddd;
+}
+
+.movie-title {
+	color: black;
+	font-family: "Roboto", sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+}
+a {
+	color: black;
+	font-family: "Arial", sans-serif;
+}
+.title {
+	text-align: center;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	color: #333;
+	text-decoration: none;
+}
