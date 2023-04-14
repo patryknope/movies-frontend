@@ -1,6 +1,6 @@
 import React from "react";
 import AddMovieForm from "./AddMovieForm";
-import { addMovie } from "../service/api";
+import { addMovie } from "../service/Api.js";
 
 function AddMovie() {
 	const handleAddMovie = async data => {

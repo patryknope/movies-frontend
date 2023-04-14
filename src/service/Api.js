@@ -5,22 +5,33 @@ const api = axios.create({
 });
 
 export const addMovie = async data => {
-	console.log("addMovie called with data:", data);
 	try {
 		const response = await api.post("", data);
-		console.log("addMovie response:", response.data);
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
 
-export const getMovies = async () => {
+export const getMovies = async ({ page = 0, size = 10 } = {}) => {
 	try {
-		const response = await api.get("");
-		return response.data;
+		page = parseInt(page);
+
+		const response = await api.get("", {
+			params: { page, size },
+		});
+
+		if (response.status >= 200 && response.status < 300) {
+			return response.data;
+		} else {
+			throw new Error(
+				`Failed to get movies. Server returned ${response.status}`
+			);
+		}
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
 
@@ -42,14 +53,28 @@ export const searchMovies = async searchQuery => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
+
 export const deleteAllMovies = async () => {
 	try {
-		const response = await api.delete("/movies");
+		const response = await api.delete("/");
 		console.log("deleteAllMovies response:", response.data);
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		throw error;
+	}
+};
+
+export const setMovies = async movies => {
+	try {
+		const response = await api.put("/", movies);
+		console.log("setMovies response:", response.data);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+		throw error;
 	}
 };

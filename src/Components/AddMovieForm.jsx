@@ -24,6 +24,7 @@ function AddMovieForm(props) {
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		const data = Object.fromEntries(formData.entries());
+		data.grade = grade; // Add the grade property to the data object
 		props.onSubmit(data);
 	};
 

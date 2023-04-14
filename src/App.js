@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MovieList from "./Components/MovieList";
 import AddMovie from "./Components/AddMovieForm";
@@ -7,7 +7,10 @@ import { searchMovies } from "./service/Api";
 
 function App() {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [searchResults, setSearchResults] = useState([]);
+	const [searchResults, setSearchResults] = useState({
+		content: [],
+		totalPages: 0,
+	});
 
 	function handleSearch(query) {
 		setSearchQuery(query);
@@ -16,7 +19,7 @@ function App() {
 				setSearchResults(data);
 			});
 		} else {
-			setSearchResults([]);
+			setSearchResults({ content: [], totalPages: 0 });
 		}
 	}
 
@@ -31,7 +34,12 @@ function App() {
 				<Routes>
 					<Route
 						path='/'
-						element={<MovieList searchResults={searchResults} />}
+						element={
+							<MovieList
+								searchResults={searchResults}
+								setSearchResults={setSearchResults}
+							/>
+						}
 					/>
 					<Route
 						path='/addmovie'
@@ -39,7 +47,12 @@ function App() {
 					/>
 					<Route
 						path='/movies'
-						element={<MovieList searchResults={searchResults} />}
+						element={
+							<MovieList
+								searchResults={searchResults}
+								setSearchResults={setSearchResults}
+							/>
+						}
 					/>
 				</Routes>
 			</div>
