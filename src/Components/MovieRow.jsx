@@ -10,7 +10,7 @@ function MovieRow({ movie }) {
 				<Link to={`/movies/${movie.id}`}>{movie.title}</Link>
 			</td>
 			<td>{movie.year}</td>
-			<td>{movie.category}</td>
+			<td>{movie.category.toUpperCase()}</td>
 			<td>
 				<StarDisplay rating={movie.grade} />
 			</td>

@@ -2,14 +2,19 @@ import axios from "axios";
 
 const api = axios.create({
 	baseURL: "http://localhost:8080/movies",
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
 
 export const addMovie = async data => {
 	try {
+		console.log("Calling API to add movie with data:", data);
 		const response = await api.post("", data);
+		console.log("API response:", response.data);
 		return response.data;
 	} catch (error) {
-		console.error(error);
+		console.error("Error in addMovie API call:", error);
 		throw error;
 	}
 };

@@ -3,15 +3,15 @@ import AddMovieForm from "./AddMovieForm";
 import { addMovie } from "../service/Api.js";
 
 function AddMovie() {
-	const handleAddMovie = async data => {
-		console.log("AddMovie called with data:", data);
+	async function handleAddMovie(data) {
+		console.log(data);
 		try {
-			const response = await addMovie(data);
-			console.log("AddMovie response:", response);
+			const addedMovie = await addMovie(data);
+			console.log("Added movie:", addedMovie);
 		} catch (error) {
-			console.error(error);
+			console.error("Failed to add movie:", error);
 		}
-	};
+	}
 
 	return (
 		<div>

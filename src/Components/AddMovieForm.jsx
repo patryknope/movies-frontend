@@ -8,7 +8,7 @@ import "../Styles/AddMovieForm.css";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function AddMovieForm(props) {
+function AddMovieForm({ onSubmit }) {
 	const navigate = useNavigate();
 	const [title, setTitle] = useState("");
 	const [year, setYear] = useState("");
@@ -22,10 +22,15 @@ function AddMovieForm(props) {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		const formData = new FormData(event.target);
-		const data = Object.fromEntries(formData.entries());
-		data.grade = grade; // Add the grade property to the data object
-		props.onSubmit(data);
+		const data = {
+			title: title,
+			year: year,
+			category: category,
+			description: description,
+			grade: grade,
+		};
+		console.log("Form submitted", data); // Log the data object
+		onSubmit(data); // Pass the data object to the onSubmit function
 	};
 
 	const handleTitleChange = event => {
@@ -120,7 +125,10 @@ function AddMovieForm(props) {
 						<button type='submit' className='submit-button'>
 							Add movie
 						</button>
-						<button className='go-back-button' onClick={handleGoBack}>
+						<button
+							className='go-back-button'
+							onClick={handleGoBack}
+							type='button'>
 							Go back
 						</button>
 					</div>

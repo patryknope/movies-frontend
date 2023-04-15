@@ -33,13 +33,17 @@ const Header = ({ onSearch }) => {
 					<CustomButton text='List of movies' />
 				</Link>
 				<CustomButton text='Populate movies' onClick={handleShow} />
+				<CustomButton
+					text='Delete all movies'
+					onClick={handleDeleteAllMovies}
+				/>
 				<Modal show={show} onHide={handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title>Populate/Delete Movies</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						Are you sure you want to populate/delete the list of movies? This
-						will delete all current movies in the database.
+						Are you sure you want to populate the list of movies? It will
+						generate 20 movies defined in the back-edn
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant='secondary' onClick={handleClose}>
