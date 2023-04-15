@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MovieList from "./Components/MovieList";
 import AddMovie from "./Components/AddMovieForm";
 import Header from "./Components/Header";
-import { searchMovies } from "./service/Api";
+import { searchMovies, addMovie } from "./service/Api";
 
 function App() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -23,8 +23,14 @@ function App() {
 		}
 	}
 
-	function handleAddMovie(data) {
+	async function handleAddMovie(data) {
 		console.log(data);
+		try {
+			const addedMovie = await addMovie(data);
+			console.log("Added movie:", addedMovie);
+		} catch (error) {
+			console.error("Failed to add movie:", error);
+		}
 	}
 
 	return (
