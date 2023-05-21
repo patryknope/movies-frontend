@@ -11,7 +11,7 @@ const FormTextarea = ({ id, name, label, value, onChange, className }) => {
 				value={value}
 				onChange={onChange}
 				className='input-field'
-				style={{ resize: "none" }} // prevent textarea from being resized
+				style={{ resize: "none" }}
 			/>
 		</div>
 	);

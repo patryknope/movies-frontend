@@ -4,7 +4,7 @@ import ListTable from "../Utils/ListTable";
 import Pagination from "../Utils/Pagination";
 import { getMovies } from "../service/Api.js";
 
-const columns = ["Title", "Year", "Category", "Grade", "Operations"];
+const columns = ["Title", "Year", "Category", "Grade"];
 
 const MovieList = ({ searchResults, setSearchResults }) => {
 	const [page, setPage] = useState(1);
