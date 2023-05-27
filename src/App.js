@@ -4,6 +4,23 @@ import MovieList from "./Components/MovieList";
 import AddMovie from "./Components/AddMovieForm";
 import Header from "./Components/Header";
 import { searchMovies, addMovie } from "./service/Api";
+import Modal from 'react-modal';
+
+
+const customStyles = {
+	content: {
+	  top: '50%',
+	  left: '50%',
+	  right: 'auto',
+	  bottom: 'auto',
+	  marginRight: '-50%',
+	  transform: 'translate(-50%, -50%)',
+	},
+  };
+
+
+
+Modal.setAppElement('#root');
 
 function App() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -11,6 +28,23 @@ function App() {
 		content: [],
 		totalPages: 0,
 	});
+
+	const [modalIsOpen, setIsOpen] = React.useState(false);
+	let subtitle;
+
+	function openModal() {
+	  setIsOpen(true);
+	}
+  
+	function afterOpenModal() {
+	  // references are now sync'd and can be accessed.
+	  subtitle.style.color = '#f00';
+	}
+  
+	function closeModal() {
+	  setIsOpen(false);
+	}
+
 
 	function handleSearch(query) {
 		setSearchQuery(query);
@@ -36,7 +70,22 @@ function App() {
 	return (
 		<Router>
 			<div>
-				<Header onSearch={handleSearch} />
+			<Modal
+				isOpen={modalIsOpen}
+				onAfterOpen={afterOpenModal}
+				onRequestClose={closeModal}
+				style={customStyles}
+				contentLabel="Example Modal"
+			>
+				<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Login</h2>
+				<button onClick={closeModal}>close</button>
+				<form>
+				<input placeholder="login"/>
+				<input placeholder="password"/>
+				<button>tab navigation</button>
+				</form>
+			</Modal>
+				<Header onSearch={handleSearch} onLoginClick={openModal} />
 				<Routes>
 					<Route
 						path='/'

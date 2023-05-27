@@ -6,7 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import { populateMovies, deleteAllMovies } from "../service/Api.js";
 import SearchBar from "./SearchBar";
 
-const Header = ({ onSearch }) => {
+const Header = ({ onSearch, onLoginClick }) => {
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -33,6 +33,7 @@ const Header = ({ onSearch }) => {
 					<CustomButton text='List of movies' />
 				</Link>
 				<CustomButton text='Populate movies' onClick={handleShow} />
+				<CustomButton text='Login' onClick={onLoginClick} />
 				<CustomButton
 					text='Delete all movies'
 					onClick={handleDeleteAllMovies}
