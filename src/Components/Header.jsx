@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { CustomButton } from "../Utils/CustomButton";
+import { LoginBox } from "../Utils/UserBox"
 import { Link } from "react-router-dom";
 import "../Styles/Header.css";
 import { Modal, Button } from "react-bootstrap";
 import { populateMovies, deleteAllMovies } from "../service/Api.js";
 import SearchBar from "./SearchBar";
 
-const Header = ({ onSearch, onLoginClick }) => {
+const Header = ({ onSearch, onLoginClick, closing }) => {
+
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -25,6 +27,9 @@ const Header = ({ onSearch, onLoginClick }) => {
 	return (
 		<div className='header'>
 			<h1>Movie Rating App</h1>
+
+			<LoginBox username={''} loginModalHandle={onLoginClick} closing={closing}/>
+
 			<div className='header-buttons'>
 				<Link to='/addmovie'>
 					<CustomButton text='Add movie' />
@@ -33,7 +38,7 @@ const Header = ({ onSearch, onLoginClick }) => {
 					<CustomButton text='List of movies' />
 				</Link>
 				<CustomButton text='Populate movies' onClick={handleShow} />
-				<CustomButton text='Login' onClick={onLoginClick} />
+				{/* <CustomButton text='Login' onClick={onLoginClick} /> */}
 				<CustomButton
 					text='Delete all movies'
 					onClick={handleDeleteAllMovies}

@@ -5,6 +5,12 @@ import AddMovie from "./Components/AddMovieForm";
 import Header from "./Components/Header";
 import { searchMovies, addMovie } from "./service/Api";
 import Modal from 'react-modal';
+import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  logInWithEmailAndPassword
+} from "./firebase";
 
 
 const customStyles = {
@@ -23,6 +29,27 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function App() {
+
+	const [user, loading, error] = useAuthState(auth);
+	
+		const [state, setState] = useState({
+		  email: "",
+		  password: ""
+		});
+
+		const handleInputChange = (event) => {
+			const { name, value } = event.target;
+			setState((prevProps) => ({
+			  ...prevProps,
+			  [name]: value
+			}));
+		  };
+		
+		  const handleSubmit = (event) => {
+			event.preventDefault();
+			console.log(state);
+		  };
+
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResults, setSearchResults] = useState({
 		content: [],
@@ -71,21 +98,37 @@ function App() {
 		<Router>
 			<div>
 			<Modal
-				isOpen={modalIsOpen}
+i				isOpen={modalIsOpen && !user}
 				onAfterOpen={afterOpenModal}
 				onRequestClose={closeModal}
 				style={customStyles}
 				contentLabel="Example Modal"
 			>
 				<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Login</h2>
-				<button onClick={closeModal}>close</button>
-				<form>
-				<input placeholder="login"/>
-				<input placeholder="password"/>
-				<button>tab navigation</button>
+				{/* <button onClick={closeModal}>close</button> */}
+				<form onSubmit={handleSubmit}>
+
+					<div style={{display: "flex", flexDirection: "column"}}>
+					<input
+					placeholder="email"
+						type="text"
+						name="email"
+						value={state.email}
+						onChange={handleInputChange}
+					/>
+					<input
+					placeholder="password"
+						type="password"
+						name="password"
+						value={state.password}
+						onChange={handleInputChange}
+					/>
+					<button type="button" onClick={() => logInWithEmailAndPassword(state.email, state.password)}>Login</button>
+					<button type="button" onClick={() => registerWithEmailAndPassword(state.email, state.password)}>Register</button>
+				</div>
 				</form>
 			</Modal>
-				<Header onSearch={handleSearch} onLoginClick={openModal} />
+				<Header onSearch={handleSearch} onLoginClick={openModal} closing={setIsOpen} />
 				<Routes>
 					<Route
 						path='/'
