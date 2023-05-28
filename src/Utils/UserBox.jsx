@@ -6,7 +6,7 @@ import {
 } from "./../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export const LoginBox = ({username,loginModalHandle, closing }) => {
+export const LoginBox = ({loginModalHandle}) => {
 
 
 
@@ -14,7 +14,7 @@ export const LoginBox = ({username,loginModalHandle, closing }) => {
     
 
     if(user) {
-    return <div className="login-box" onClick={ () => {closing(false); logout() }}>
+    return <div className="login-box" onClick={ () => {logout() }}>
             <h4>{user?.email} (Sign out) </h4>
         </div>
     } else {

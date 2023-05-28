@@ -7,6 +7,10 @@ import FormTextarea from "../Utils/FormTextarea";
 import "../Styles/AddMovieForm.css";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./../firebase";
 
 function AddMovieForm({ onSubmit }) {
 	const navigate = useNavigate();
@@ -15,6 +19,19 @@ function AddMovieForm({ onSubmit }) {
 	const [category, setCategory] = useState("");
 	const [description, setDescription] = useState("");
 	const [grade, setGrade] = useState(0);
+	const [user, loading, error] = useAuthState(auth);
+
+	const notify = (msg) =>
+    toast.success(msg, {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
 	const handleRatingChange = rating => {
 		setGrade(rating);
@@ -28,8 +45,10 @@ function AddMovieForm({ onSubmit }) {
 			category: category,
 			description: description,
 			grade: grade,
+			owner: user.email
 		};
 		console.log("Form submitted", data); // Log the data object
+		notify('Movie added')
 		onSubmit(data); // Pass the data object to the onSubmit function
 	};
 
@@ -55,6 +74,10 @@ function AddMovieForm({ onSubmit }) {
 
 	return (
 		<div className='add-movie-form-container'>
+
+
+		<ToastContainer/>
+
 			<form onSubmit={handleSubmit} className='add-movie-form'>
 				<div className='icon-container'>
 					<FontAwesomeIcon icon={faFilm} size='2x' />
