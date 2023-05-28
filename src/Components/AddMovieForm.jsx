@@ -45,7 +45,7 @@ function AddMovieForm({ onSubmit }) {
 			category: category,
 			description: description,
 			grade: grade,
-			owner: user.email
+			user: user.email
 		};
 		console.log("Form submitted", data); // Log the data object
 		notify('Movie added')

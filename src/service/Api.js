@@ -19,12 +19,12 @@ export const addMovie = async data => {
 	}
 };
 
-export const getMovies = async ({ page = 0, size = 10 } = {}) => {
+export const getMovies = async ({ email, page = 0, size = 10 } = {}) => {
 	try {
 		page = parseInt(page);
 
 		const response = await api.get("", {
-			params: { page, size },
+			params: { page, size, email },
 		});
 
 		if (response.status >= 200 && response.status < 300) {
