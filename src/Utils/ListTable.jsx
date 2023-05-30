@@ -1,7 +1,7 @@
 import React from "react";
 import MovieRow from "../Components/MovieRow";
 
-function ListTable({ columns, data }) {
+function ListTable({ columns, data, upd }) {
 	return (
 		<table>
 			<thead>
@@ -13,7 +13,7 @@ function ListTable({ columns, data }) {
 			</thead>
 			<tbody>
 				{data.map(movie => (
-					<MovieRow key={movie.id} movie={movie} />
+					<MovieRow key={movie.id} movie={movie} upd={upd} />
 				))}
 			</tbody>
 		</table>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import StarDisplay from "../Utils/StarDisplay";
 import "../Styles/Movies.css";
 
-function MovieRow({ movie }) {
+function MovieRow({ movie , upd}) {
 	return (
 		<tr key={movie.id}>
 			<td className='movie-title'>
@@ -12,7 +12,7 @@ function MovieRow({ movie }) {
 			<td>{movie.year}</td>
 			<td>{movie.category.toUpperCase()}</td>
 			<td>
-				<StarDisplay rating={movie.grade} />
+				<StarDisplay rating={movie.grade} movieid={movie.id} upd={upd} />
 			</td>
 		</tr>
 	);

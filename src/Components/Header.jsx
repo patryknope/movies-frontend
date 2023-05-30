@@ -183,18 +183,18 @@ const Header = ({ onSearch, onLoginClick, closing }) => {
       />
 
       <div className="header-buttons">
-        {/* <Link to="/addmovie"> */}
           <CustomButton text="Add movie" onClick={handleGoToAddMovie} />
-        {/* </Link> */}
         <Link to="/movies">
-          <CustomButton text="List of movies" />
+          <CustomButton text="All movies" />
         </Link>
-        {/* <CustomButton text="sec" onClick={} /> */}
-        {/* <CustomButton text="Populate movies" onClick={handleShow} /> */}
-        {/* <CustomButton
+        <Link to="/mymovies">
+          <CustomButton text="My movies" />
+        </Link>
+        <CustomButton text="Populate movies" onClick={handleShow} />
+        <CustomButton
           text="Delete all movies"
           onClick={handleDeleteAllMovies}
-        /> */}
+        />
 
         <Modal show={show2} onHide={handleClose2}>
           <Modal.Header closeButton>

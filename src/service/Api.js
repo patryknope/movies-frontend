@@ -19,11 +19,32 @@ export const addMovie = async data => {
 	}
 };
 
-export const getMovies = async ({ email, page = 0, size = 10 } = {}) => {
+export const getMovies = async ({  page = 0, size = 10 } = {}) => {
 	try {
 		page = parseInt(page);
 
 		const response = await api.get("", {
+			params: { page, size },
+		});
+
+		if (response.status >= 200 && response.status < 300) {
+			return response.data;
+		} else {
+			throw new Error(
+				`Failed to get movies. Server returned ${response.status}`
+			);
+		}
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+export const getMyMovies = async ({ email, page = 0, size = 10 } = {}) => {
+	try {
+		page = parseInt(page);
+
+		const response = await api.get("myvideos", {
 			params: { page, size, email },
 		});
 
@@ -73,10 +94,22 @@ export const deleteAllMovies = async () => {
 	}
 };
 
-export const setMovies = async movies => {
+export const setMovies = async (id, movies) => {
 	try {
-		const response = await api.put("/", movies);
+		const response = await api.put("/"+id, movies);
 		console.log("setMovies response:", response.data);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+export const gradeSet = async (id, grade) => {
+	try {
+		console.log(id +" " + grade)
+		const response = await api.post("/gradeset", {id, grade});
+		console.log("gradeSet response:", response.data);
 		return response.data;
 	} catch (error) {
 		console.error(error);

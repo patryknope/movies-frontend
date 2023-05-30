@@ -38,7 +38,7 @@ function App() {
 		if (query) {
 			searchMovies(query).then(data => {
 				setSearchResults(data);
-			});
+			}); 
 		} else {
 			setSearchResults({ content: [], totalPages: 0 });
 		}
@@ -74,6 +74,15 @@ function App() {
 					/>
 					<Route
 						path='/movies'
+						element={
+							<MovieList
+								searchResults={searchResults}
+								setSearchResults={setSearchResults}
+							/>
+						}
+					/>
+					<Route
+						path='/mymovies'
 						element={
 							<MovieList
 								searchResults={searchResults}
